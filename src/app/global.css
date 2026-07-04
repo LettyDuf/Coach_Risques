@@ -1,0 +1,56 @@
+/**
+ * Reset minimum + base typographique.
+ *
+ * Discipline : aucun composant ne définit ses fonds, ses couleurs de
+ * texte, ses tailles de police en dur. Tout passe par les tokens
+ * (`tokens.css`).
+ */
+
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--risk-font-sans);
+  font-size: var(--risk-text-base);
+  line-height: var(--risk-leading-body);
+  color: var(--risk-text);
+  background-color: var(--risk-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--risk-font-serif);
+  font-weight: 600;
+  line-height: var(--risk-leading-tight);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  max-width: var(--risk-measure);
+}
+
+a {
+  color: var(--risk-focus);
+}
+
+:focus-visible {
+  outline: 2px solid var(--risk-focus);
+  outline-offset: 2px;
+  border-radius: var(--risk-radius-sm);
+}

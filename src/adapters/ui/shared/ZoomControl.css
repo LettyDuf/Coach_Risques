@@ -1,0 +1,49 @@
+/**
+ * Contrôle de zoom — styles partagés (charte cabinet, D24).
+ * Cadre parchemin, pastilles Small Caps, valeur centrale active en cuivre au hover.
+ */
+
+.zoom-ctrl {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid var(--cabinet-ink-parchment);
+  border-radius: 6px;
+  background: var(--cabinet-parchment);
+  overflow: hidden;
+}
+
+.zoom-ctrl__btn,
+.zoom-ctrl__value {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid rgba(122, 106, 78, 0.3);
+  color: var(--cabinet-ink);
+  font-family: var(--cabinet-font-caps);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 40px;
+}
+
+.zoom-ctrl__btn:last-child,
+.zoom-ctrl__value:last-child {
+  border-right: 0;
+}
+
+.zoom-ctrl__value {
+  min-width: 56px;
+  font-variant-numeric: tabular-nums;
+  background: var(--cabinet-parchment-alt);
+}
+
+.zoom-ctrl__btn:hover:not(:disabled),
+.zoom-ctrl__value:hover {
+  background: var(--cabinet-ink-cuivre);
+  color: var(--cabinet-parchment);
+}
+
+.zoom-ctrl__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Coach Risques — Mockup v3 Le Tri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap"/>
+<style>
+  body { margin: 0; padding: 32px 24px; background: #E5DFCE; font-family: Inter, sans-serif; color: #1B1D22; }
+  .wrap { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; }
+  .doc-header h1 { font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500; margin: 0 0 6px 0; }
+  .doc-header p { color: #4A4F58; font-size: 15px; max-width: 68ch; margin: 0; }
+  .section-label { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A7466; margin-bottom: 8px; font-weight: 500; }
+  .section-title { font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 500; margin: 0 0 6px 0; }
+  .section-desc { color: #4A4F58; font-size: 14px; margin: 0 0 16px 0; max-width: 72ch; }
+
+  .board { background: #F4EFE6; border: 0.5px solid #C9BFAA; border-radius: 14px; padding: 28px; box-shadow: 0 4px 12px rgba(27,29,34,0.04); }
+
+  .tri-header { display: flex; align-items: center; gap: 14px; padding-bottom: 14px; border-bottom: 0.5px solid #C9BFAA; margin-bottom: 22px; }
+  .tri-badge { flex-shrink: 0; }
+  .tri-title { font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 500; margin: 0; }
+  .tri-sub { font-size: 13px; color: #4A4F58; margin: 4px 0 0 0; }
+
+  /* Grille plus équilibrée : la partie gauche prend moins de place, la partie droite reprend son format 2×2 */
+  .tri-main { display: grid; grid-template-columns: minmax(260px, 320px) 1fr; gap: 30px; align-items: start; }
+
+  .tri-left { display: flex; flex-direction: column; align-items: stretch; }
+  /* Carte-énoncé — rétrécie, hauteur adaptative au contenu */
+  .tri-card {
+    background: #FFFCF6; border: 1.5px solid #C9BFAA; border-radius: 12px;
+    box-shadow: 0 16px 32px rgba(27,29,34,0.10);
+    padding: 18px 20px 16px 20px;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative;
+  }
+  .tri-card::before { content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 0.5px solid #E8E0D1; border-radius: 8px; pointer-events: none; }
+  .tri-card-band { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 0.5px solid #E8E0D1; }
+  .tri-card-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #4A4F58; font-weight: 500; }
+  .tri-card-team { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #B85A1E; font-style: italic; }
+  .team-dot { width: 9px; height: 9px; border-radius: 50%; background: #B85A1E; opacity: 0.65; }
+  .tri-card-body { font-family: 'Source Serif 4', serif; font-size: 18px; line-height: 1.55; color: #1B1D22; padding: 4px 2px; }
+  .tri-card-body em { font-style: italic; color: #B02A2A; font-weight: 500; }
+
+  /* Cibles 2×2, format carré, taille v1 */
+  .tri-targets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tri-target {
+    background: #FFFCF6; border: 1.5px solid #C9BFAA; border-left-width: 5px;
+    border-radius: 10px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 10px;
+    box-shadow: 0 4px 10px rgba(27,29,34,0.04);
+    transition: all 200ms ease;
+    cursor: pointer;
+    min-height: 112px;
+  }
+  .tri-target:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(27,29,34,0.10); }
+  .tri-t-enjeu { border-left-color: #3E5E8F; }
+  .tri-t-objectif { border-left-color: #5A7DA8; }
+  .tri-t-risque { border-left-color: #B02A2A; }
+  .tri-t-issue { border-left-color: #B85A1E; }
+  .tri-target-head { display: flex; align-items: center; }
+  .tri-target-emblem { width: 34px; height: 34px; }
+  .tri-target-name { font-family: 'Source Serif 4', serif; font-size: 17px; font-weight: 500; margin: 0; color: #1B1D22; }
+  .tri-target-hint { font-size: 12px; color: #4A4F58; margin: 0; line-height: 1.4; }
+
+  .diff {
+    background: #FFFCF6; border: 0.5px solid #C9BFAA; border-radius: 10px;
+    padding: 20px; margin-top: 8px; font-size: 13px; color: #4A4F58; line-height: 1.65;
+  }
+  .diff strong { color: #1B1D22; }
+  .diff h3 { font-family: 'Source Serif 4', serif; font-size: 15px; margin: 0 0 10px 0; color: #1B1D22; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="doc-header">
+    <h1>Le Tri · itération v3</h1>
+    <p>Corrections : cibles catégorielles remises en format 2×2 comme dans la v1 (plus lisibles), carte-énoncé rétrécie et adaptée à sa vraie taille de contenu. Chiffres et raccourcis clavier toujours retirés.</p>
+  </div>
+
+  <div>
+    <span class="section-label">Le Tri · v3</span>
+    <h2 class="section-title">Carte-énoncé rétrécie + cibles 2×2 restaurées</h2>
+    <p class="section-desc">La carte à gauche n'a plus de hauteur minimale imposée — elle grandit avec son texte. Les 4 cibles reprennent leur format cartes 2×2 avec emblème en haut, nom en Source Serif 4, hint en Inter. Toujours pas de chiffres, pas d'id item, pas de raccourci visible.</p>
+    <div class="board">
+
+      <div class="tri-header">
+        <svg class="tri-badge" width="46" height="52" viewBox="0 0 100 115">
+          <polygon points="50,3 95,29 95,86 50,112 5,86 5,29" fill="#FFFCF6" stroke="#3E5E8F" stroke-width="2"/>
+          <polygon points="50,10 88,32 88,83 50,105 12,83 12,32" fill="none" stroke="#3E5E8F" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div>
+          <h3 class="tri-title">Le Tri</h3>
+          <p class="tri-sub">Reconnaître un risque parmi quatre catégories proches</p>
+        </div>
+      </div>
+
+      <div class="tri-main">
+
+        <div class="tri-left">
+          <div class="tri-card">
+            <div class="tri-card-band">
+              <span class="tri-card-tag">Formulation</span>
+              <span class="tri-card-team"><span class="team-dot"></span>Colibri</span>
+            </div>
+            <div class="tri-card-body">« Notre principal <em>risque</em>, c'est de ne pas livrer la V2 le 30 septembre. »</div>
+          </div>
+        </div>
+
+        <div class="tri-targets">
+          <div class="tri-target tri-t-enjeu">
+            <div class="tri-target-head">
+              <svg class="tri-target-emblem" viewBox="0 0 32 32" fill="none" stroke="#3E5E8F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 26h8"/><path d="M14 26v-8h4v8"/><path d="M13 18h6"/><path d="M16 18c-2 -2 -2 -5 0 -8"/><polygon points="14.5,8 16,4 17.5,8" fill="#3E5E8F"/>
+              </svg>
+            </div>
+            <p class="tri-target-name">Enjeu</p>
+            <p class="tri-target-hint">Une valeur à préserver.</p>
+          </div>
+          <div class="tri-target tri-t-objectif">
+            <div class="tri-target-head">
+              <svg class="tri-target-emblem" viewBox="0 0 32 32" fill="none" stroke="#5A7DA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="3" fill="#5A7DA8"/><path d="M24 8l-5 5"/><path d="M21 5v3h3"/>
+              </svg>
+            </div>
+            <p class="tri-target-name">Objectif</p>
+            <p class="tri-target-hint">Une cible mesurable à viser.</p>
+          </div>
+          <div class="tri-target tri-t-risque">
+            <div class="tri-target-head">
+              <svg class="tri-target-emblem" viewBox="0 0 32 32" fill="none" stroke="#B02A2A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 14a5 5 0 0 1 0 -10a6 6 0 0 1 11 -1a5 5 0 0 1 3 11h-14z" stroke-dasharray="3 2"/>
+                <path d="M15 20v6" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+            <p class="tri-target-name">Risque</p>
+            <p class="tri-target-hint">Un événement incertain, à venir.</p>
+          </div>
+          <div class="tri-target tri-t-issue">
+            <div class="tri-target-head">
+              <svg class="tri-target-emblem" viewBox="0 0 32 32" fill="none" stroke="#B85A1E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 12a5 5 0 0 1 0 -10a6 6 0 0 1 11 -1a5 5 0 0 1 3 11h-14z" fill="rgba(184,90,30,0.15)"/>
+                <path d="M12 22h2M15 25l0 -1M18 22h2" stroke-width="2"/>
+              </svg>
+            </div>
+            <p class="tri-target-name">Issue</p>
+            <p class="tri-target-hint">Un problème déjà constaté.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="diff">
+    <h3>Ce qui a changé depuis la v2</h3>
+    <strong>Carte-énoncé à gauche</strong> — plus de hauteur minimale forcée. Elle prend juste la place qu'il faut pour son texte. Sur cet exemple, elle fait environ 180-200px de haut au lieu de 280px.<br><br>
+    <strong>Cibles à droite</strong> — retour au format 2×2 en cartes carrées, avec emblème en haut, nom en Source Serif 4, hint en Inter dessous. Sans raccourcis clavier visibles (ils restent actifs).<br><br>
+    <strong>Grille générale</strong> — 320px maximum pour la colonne gauche, le reste pour les cibles. Équilibre des deux zones.
+  </div>
+
+</div>
+</body>
+</html>

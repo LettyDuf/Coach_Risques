@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Coach Risques — Mockup v7 : jeu de plateau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+English+SC&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap"/>
+<style>
+  body { margin: 0; padding: 32px 24px; background: #B8C7B0; font-family: Inter, sans-serif; color: #2A2622; }
+  .wrap { max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+  .doc-header h1 { font-family: 'IM Fell DW Pica', serif; font-size: 36px; font-weight: 400; margin: 0 0 8px 0; color: #2A2622; }
+  .doc-header p { color: #4A4F58; font-size: 15px; max-width: 74ch; margin: 0; font-family: Lora, serif; }
+  .doc-header em { font-style: italic; color: #2A2622; }
+
+  /* ==== PLATEAU DE JEU ==== */
+  .plateau {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,240,200,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 80%, rgba(90,60,20,0.10) 0%, transparent 55%),
+      linear-gradient(180deg, #D2BE95 0%, #C9B487 55%, #BEA97A 100%);
+    border-radius: 18px;
+    padding: 40px 44px;
+    box-shadow:
+      0 30px 70px rgba(30,40,30,0.30),
+      inset 0 0 0 1px rgba(255,255,255,0.20),
+      inset 0 0 0 3px rgba(120,90,50,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Grain plateau */
+  .plateau::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.05 0 0 0 0.4 0'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.35'/></svg>");
+    opacity: 0.12; mix-blend-mode: multiply;
+  }
+
+  .plateau-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 20px; border-bottom: 1.5px solid rgba(42,38,34,0.20);
+    margin-bottom: 32px;
+  }
+  .plateau-title { font-family: 'IM Fell DW Pica', serif; font-size: 34px; color: #2A2622; margin: 0; letter-spacing: 0.01em; font-weight: 400; }
+  .plateau-sub { font-family: 'Lora', serif; font-style: italic; color: #4A4F58; font-size: 15px; margin: 6px 0 0 0; }
+  .plateau-cabinet { font-family: 'IM Fell English SC', serif; font-size: 14px; color: #4A4F58; letter-spacing: 0.08em; }
+
+  .plateau-grid {
+    display: grid;
+    grid-template-columns: 96px 1fr 96px;
+    grid-template-rows: auto auto;
+    gap: 32px 24px;
+    align-items: center;
+  }
+
+  /* ==== PILE DE TIRAGE (gauche) ==== */
+  .pile { grid-row: 1; grid-column: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .pile-cards { position: relative; width: 74px; height: 104px; }
+  .pile-cards .card-back {
+    position: absolute; inset: 0; border-radius: 6px;
+    background: #3B4B3E;
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0 10px, rgba(176,138,62,0.14) 10px 11px),
+      repeating-linear-gradient(-45deg, transparent 0 10px, rgba(176,138,62,0.14) 10px 11px);
+    border: 1.5px solid #B08A3E;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .pile-cards .card-back:nth-child(1) { transform: translate(-4px, -3px); }
+  .pile-cards .card-back:nth-child(2) { transform: translate(-2px, -2px); }
+  .pile-cards .card-back:nth-child(3) { transform: translate(0px, 0px); }
+  .pile-cards .card-back::after {
+    content: 'C·R'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'IM Fell DW Pica', serif; color: #B08A3E; font-size: 12px; letter-spacing: 0.1em;
+  }
+  .pile-label { font-family: 'IM Fell English SC', serif; font-size: 11px; letter-spacing: 0.14em; color: #2A2622; text-transform: uppercase; }
+
+  /* ==== CARTE-ÉNONCÉ (centre) ==== */
+  .aire-lecture { grid-row: 1; grid-column: 2; display: flex; justify-content: center; align-items: center; }
+  .card {
+    background: #F4EDD8;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='2' seed='3'/><feColorMatrix type='matrix' values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.15 0 0 0 0.3 0'/></filter><rect width='80' height='80' filter='url(%23n)' opacity='0.4'/></svg>");
+    width: 300px; height: 420px;
+    border-radius: 8px;
+    padding: 18px;
+    box-sizing: border-box;
+    box-shadow:
+      0 8px 20px rgba(42,38,34,0.28),
+      0 0 0 1.5px #7A6A4E,
+      inset 0 0 0 3px #F4EDD8,
+      inset 0 0 0 4px #B08A3E,
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      inset 0 -1px 0 rgba(42,38,34,0.15);
+    position: relative;
+    display: flex; flex-direction: column;
+    transform: rotate(-1.5deg);
+  }
+  /* rosaces aux 4 coins */
+  .card::before, .card::after {
+    content: '❦'; position: absolute; color: #B08A3E; font-size: 12px; font-family: serif;
+    line-height: 1;
+  }
+  .card::before { top: 10px; left: 10px; }
+  .card::after { bottom: 10px; right: 10px; }
+  .card-rosace-tr, .card-rosace-bl {
+    position: absolute; color: #B08A3E; font-size: 12px; font-family: serif; line-height: 1;
+  }
+  .card-rosace-tr { top: 10px; right: 10px; }
+  .card-rosace-bl { bottom: 10px; left: 10px; }
+
+  .card-band {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 8px 10px 8px;
+    border-bottom: 1px solid rgba(122,106,78,0.4);
+    margin-bottom: 8px;
+  }
+  .card-band-team {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 12px; letter-spacing: 0.12em;
+    color: #7A6A4E;
+  }
+  .card-band-icon { color: #7A6A4E; }
+  .card-band-icon svg { width: 20px; height: 20px; }
+
+  .card-body {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    position: relative; padding: 12px 6px;
+  }
+  /* Vignette éditoriale filigrane */
+  .card-vignette {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    opacity: 0.09; pointer-events: none;
+  }
+  .card-vignette svg { width: 160px; height: 160px; }
+  .card-text {
+    font-family: 'Lora', serif; font-size: 18px; line-height: 1.5;
+    color: #2A2622; text-align: center; position: relative; z-index: 1;
+  }
+  .card-text em { font-family: 'Lora', serif; font-style: italic; color: #7A3B1E; font-weight: 500; }
+
+  .card-foot {
+    display: flex; align-items: center; justify-content: center; padding-top: 12px;
+    border-top: 1px solid rgba(122,106,78,0.4);
+    color: #B08A3E; font-size: 18px; letter-spacing: 0.4em;
+  }
+
+  /* ==== CIBLES (bas) ==== */
+  .cibles {
+    grid-row: 2; grid-column: 1 / span 3;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 24px;
+  }
+  .cible {
+    aspect-ratio: 3 / 4;
+    border-radius: 6px;
+    padding: 18px 16px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 12px; align-items: center;
+    position: relative;
+    box-shadow:
+      0 8px 18px rgba(30,40,30,0.28),
+      inset 0 0 0 1.5px rgba(0,0,0,0.15),
+      inset 0 0 0 3px #F4EDD8,
+      inset 0 0 0 4px rgba(176,138,62,0.5);
+    cursor: pointer;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='2' seed='9'/><feColorMatrix type='matrix' values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.3 0'/></filter><rect width='80' height='80' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+  .cible:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(30,40,30,0.35); }
+  /* Coins coupés en biseau via clip-path */
+  .cible {
+    clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  }
+
+  .cible-enjeu { background-color: #3E5C7A; }
+  .cible-objectif { background-color: #A0522D; }
+  .cible-risque { background-color: #5C3B5C; }
+  .cible-issue { background-color: #8A6E4A; }
+
+  .cible-illu { width: 96px; height: 96px; display: flex; align-items: center; justify-content: center; }
+  .cible-illu svg { width: 100%; height: 100%; }
+
+  .cible-title {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 22px; letter-spacing: 0.06em;
+    color: #F4EDD8; margin: 0; text-align: center;
+  }
+  .cible-hint {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 12px; color: rgba(244,237,216,0.85);
+    text-align: center; margin: 0; line-height: 1.4;
+    padding: 0 8px;
+  }
+  /* Sceau bas gauche */
+  .cible-seal {
+    position: absolute; bottom: 12px; left: 12px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--seal-color); border: 1.5px solid #B08A3E;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .cible-seal svg { width: 14px; height: 14px; color: #F4EDD8; }
+  .cible-enjeu { --seal-color: #C9A24A; }
+  .cible-objectif { --seal-color: #F4EDD8; }
+  .cible-risque { --seal-color: #A8ADB4; }
+  .cible-issue { --seal-color: #7A3B1E; }
+  .cible-objectif .cible-seal svg { color: #2A2622; }
+
+  /* Bandeau signature */
+  .signature {
+    background: rgba(244,237,216,0.85);
+    border: 1px solid #7A6A4E;
+    padding: 20px 24px; border-radius: 8px; margin-top: 8px;
+    font-family: 'Lora', serif; font-size: 13px; color: #2A2622; line-height: 1.6;
+  }
+  .signature strong { font-family: 'IM Fell English SC', serif; letter-spacing: 0.06em; }
+  .signature h3 { font-family: 'IM Fell DW Pica', serif; font-size: 18px; margin: 0 0 12px 0; font-weight: 400; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="doc-header">
+    <h1>Le Tri · le cabinet ouvert</h1>
+    <p>Refonte issue du panel <em>concepteur de jeux de plateau</em> + <em>graphiste spécialisé jeux de société</em>. Références : Wingspan (cadre illustré), Terra Mystica (sceaux), Root (typographie dessinée), Everdell (plateau bois et palette naturelle). Deux typos : <em>IM Fell DW Pica</em> pour les titres, <em>Lora</em> pour le corps. Grain SVG sur cartes et plateau. Illustrations d'objets tangibles (coffret, arc, tarot, rocher), pas de picto Lucide.</p>
+  </div>
+
+  <div class="plateau">
+    <div class="plateau-header">
+      <div>
+        <h3 class="plateau-title">Le Tri</h3>
+        <p class="plateau-sub">Reconnaître un risque parmi quatre catégories proches</p>
+      </div>
+      <span class="plateau-cabinet">Coach Risques &middot; le cabinet</span>
+    </div>
+
+    <div class="plateau-grid">
+
+      <div class="pile">
+        <div class="pile-cards">
+          <div class="card-back"></div>
+          <div class="card-back"></div>
+          <div class="card-back"></div>
+        </div>
+        <span class="pile-label">Pile</span>
+      </div>
+
+      <div class="aire-lecture">
+        <div class="card">
+          <span class="card-rosace-tr">❦</span>
+          <span class="card-rosace-bl">❦</span>
+
+          <div class="card-band">
+            <span class="card-band-team">Colibri</span>
+            <span class="card-band-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14c2 -1 4 -2 7 -2c3 0 4 2 5 3l2 -1c1 0 3 0 3 -2c-1 -2 -4 -4 -8 -4c-5 0 -8 3 -9 6z"/>
+                <circle cx="17" cy="10" r="0.6" fill="currentColor"/>
+                <path d="M4 14l-2 3M6 15l-1 3M8 15l-1 3"/>
+              </svg>
+            </span>
+          </div>
+
+          <div class="card-body">
+            <div class="card-vignette" aria-hidden="true">
+              <!-- engrenage stylisé -->
+              <svg viewBox="0 0 100 100" fill="none" stroke="#7A6A4E" stroke-width="1.5">
+                <circle cx="50" cy="50" r="18"/>
+                <circle cx="50" cy="50" r="6"/>
+                <g stroke-linecap="round">
+                  <line x1="50" y1="20" x2="50" y2="30"/>
+                  <line x1="50" y1="70" x2="50" y2="80"/>
+                  <line x1="20" y1="50" x2="30" y2="50"/>
+                  <line x1="70" y1="50" x2="80" y2="50"/>
+                  <line x1="28" y1="28" x2="35" y2="35"/>
+                  <line x1="65" y1="65" x2="72" y2="72"/>
+                  <line x1="28" y1="72" x2="35" y2="65"/>
+                  <line x1="65" y1="35" x2="72" y2="28"/>
+                </g>
+              </svg>
+            </div>
+            <p class="card-text">« Notre principal <em>risque</em>, c'est de ne pas livrer la V2 le 30 septembre. »</p>
+          </div>
+
+          <div class="card-foot">&#10038; &sim; &#10038;</div>
+        </div>
+      </div>
+
+      <div style="grid-row:1; grid-column:3;"></div>
+
+      <div class="cibles">
+
+        <!-- ENJEU · coffret -->
+        <div class="cible cible-enjeu">
+          <div class="cible-illu" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" stroke="#C9A24A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- coffret vue trois-quarts -->
+              <path d="M20 55l35 -15l40 15l-35 15z" fill="#3E5C7A"/>
+              <path d="M20 55v22l35 15v-22" fill="#2D4159"/>
+              <path d="M55 70v22l40 -15v-22" fill="#284A6E"/>
+              <path d="M20 55l35 -15l40 15" stroke-width="2"/>
+              <!-- couvercle entrouvert : rai de lumière -->
+              <path d="M52 43l6 -4l6 3" stroke-width="1.8" opacity="0.9"/>
+              <path d="M55 47l-2 -5" opacity="0.7"/>
+              <path d="M60 46l0 -5" opacity="0.7"/>
+              <path d="M65 46l2 -4" opacity="0.7"/>
+              <!-- serrure -->
+              <circle cx="70" cy="68" r="2" fill="#C9A24A"/>
+            </svg>
+          </div>
+          <p class="cible-title">Enjeu</p>
+          <p class="cible-hint">ce qu'il faut préserver</p>
+          <span class="cible-seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="15" r="4"/>
+              <path d="M12 12l7 -7M17 6h3v3"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- OBJECTIF · arc bandé -->
+        <div class="cible cible-objectif">
+          <div class="cible-illu" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" stroke="#F4EDD8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- arc -->
+              <path d="M25 20c15 20 15 40 0 60"/>
+              <!-- corde vibrante : 3 traits parallèles -->
+              <path d="M25 25l0 50" opacity="0.9"/>
+              <path d="M27 25l0 50" opacity="0.5"/>
+              <path d="M23 25l0 50" opacity="0.5"/>
+              <!-- flèche partie -->
+              <path d="M40 50l35 0" stroke-width="2"/>
+              <path d="M70 46l6 4l-6 4"/>
+              <!-- plumes -->
+              <path d="M42 47l-4 3l4 3" opacity="0.8"/>
+              <path d="M38 47l-4 3l4 3" opacity="0.5"/>
+            </svg>
+          </div>
+          <p class="cible-title">Objectif</p>
+          <p class="cible-hint">la cible qu'on vise</p>
+          <span class="cible-seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12l14 0"/>
+              <path d="M14 8l4 4l-4 4"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- RISQUE · tarot à moitié retournée -->
+        <div class="cible cible-risque">
+          <div class="cible-illu" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" stroke="#A8ADB4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- carte à moitié retournée (dos visible en haut à gauche) -->
+              <path d="M30 25l40 0l0 60l-40 0z" fill="#5C3B5C"/>
+              <!-- coin retourné qui laisse deviner un nuage -->
+              <path d="M30 25l25 -12l40 5l-15 32z" fill="#7A5479"/>
+              <!-- motif roue (dos) -->
+              <circle cx="55" cy="24" r="6" opacity="0.6"/>
+              <path d="M55 18v12M49 24h12M51 20l8 8M51 28l8 -8" opacity="0.6"/>
+              <!-- nuage au recto (côté) -->
+              <path d="M65 45c-2 -3 -5 -3 -7 -1c-3 -1 -5 1 -5 3c-3 0 -3 4 0 4l14 0c2 0 2 -4 -2 -6z" opacity="0.9"/>
+              <!-- points d'interrogation stylisés -->
+              <path d="M45 62c1 -3 5 -3 5 0c0 3 -3 2 -3 5" opacity="0.7"/>
+              <circle cx="47" cy="72" r="0.8" fill="#A8ADB4" opacity="0.7"/>
+            </svg>
+          </div>
+          <p class="cible-title">Risque</p>
+          <p class="cible-hint">l'incertain qui approche</p>
+          <span class="cible-seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 4c-4 4 -4 8 0 12c-4 4 -4 8 0 8" opacity="0.9"/>
+              <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- ISSUE · rocher tombé + chemin -->
+        <div class="cible cible-issue">
+          <div class="cible-illu" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" stroke="#7A3B1E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- chemin qui contourne -->
+              <path d="M8 85c12 -4 20 -6 30 -18c8 -5 15 -3 25 -14c6 -6 15 -8 30 -6" opacity="0.5" stroke-dasharray="4 2"/>
+              <!-- rocher -->
+              <path d="M40 55l-8 5l-4 12l6 8l14 3l10 -6l3 -10l-8 -10z" fill="#7A3B1E" fill-opacity="0.7"/>
+              <!-- facettes du rocher -->
+              <path d="M40 55l16 2l-6 8z" opacity="0.5"/>
+              <path d="M50 65l7 -3l-3 8z" opacity="0.5"/>
+              <!-- herbes couchées à la base -->
+              <path d="M20 82l3 -2M26 84l4 -3M35 84l4 -2M62 85l3 -3M68 86l3 -3" stroke-width="1.2"/>
+              <!-- trace de passage -->
+              <path d="M12 88l4 -1M20 87l4 -1M32 87l4 -1M50 85l4 -1M64 84l4 -1M76 82l4 -1" stroke-width="1" opacity="0.7"/>
+            </svg>
+          </div>
+          <p class="cible-title">Issue</p>
+          <p class="cible-hint">le fait déjà survenu</p>
+          <span class="cible-seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8l3 3l9 -9" opacity="0"/>
+              <path d="M6 18c3 -2 6 -2 9 -4c3 -2 5 -3 3 -6" />
+              <circle cx="7" cy="16" r="1" fill="currentColor"/>
+              <circle cx="12" cy="12" r="1" fill="currentColor"/>
+              <circle cx="16" cy="9" r="1" fill="currentColor"/>
+            </svg>
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="signature">
+    <h3>Signature retenue par les deux experts</h3>
+    <strong>Un plateau de bois clair sur fond sauge</strong>, avec des cartes en papier crème grainé encadrées à la Wingspan, qui se posent dans des plaquettes héraldiques illustrées d'objets tangibles (coffret entrouvert, arc bandé, tarot à moitié retournée, rocher tombé), scellées par des tampons Terra Mystica avec micro-rotation à la main. Deux typos : <strong>IM Fell DW Pica</strong> pour les titres et <strong>Lora</strong> pour le corps. Aucun picto Lucide. Grain de papier SVG. Ombres chaudes. Trois modes de saisie (drag, clic, clavier 1/2/3/4). Set de 7 cartes fabriquées avec au moins une carte piège. Aucun son. Aucun compteur. Feedback en deux temps : pose immédiate, puis bordure fine verte ou ocre à 400ms. Cinq gestes signature : prendre, peser, poser, retourner, feuilleter.
+  </div>
+
+</div>
+</body>
+</html>

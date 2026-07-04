@@ -1,0 +1,37 @@
+Coach Risques — Outil pédagogique pour rédiger et formuler des risques
+Copyright (c) 2026 Lætitia Dufour
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+This work is licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International License.
+
+Vous êtes libre de :
+  - Partager   : copier, distribuer et communiquer le matériel par tous
+                 moyens et sous tous formats.
+  - Adapter    : remixer, transformer et créer à partir du matériel pour
+                 toute utilisation, y compris commerciale.
+
+Selon les conditions suivantes :
+  - Attribution    : vous devez créditer l'œuvre, intégrer un lien vers
+                     la licence et indiquer si des modifications ont été
+                     effectuées à l'œuvre. Vous devez indiquer ces
+                     informations par tous les moyens raisonnables, sans
+                     toutefois suggérer que l'auteur original vous
+                     soutient.
+  - Partage dans   : dans le cas où vous effectuez un remix, que vous
+    les mêmes        transformez, ou créez à partir du matériel
+    conditions       composant l'œuvre originale, vous devez diffuser
+                     l'œuvre modifiée dans les même conditions, c'est à
+                     dire avec la même licence avec laquelle l'œuvre
+                     originale a été diffusée.
+
+Texte complet de la licence :
+  https://creativecommons.org/licenses/by-sa/4.0/legalcode.fr
+
+Résumé lisible :
+  https://creativecommons.org/licenses/by-sa/4.0/deed.fr
+
+Le contenu pédagogique (fichiers dans src/content/, DOMAINE.md, UX-UI.md,
+audits/, propositions de corpus) et le code de l'application sont couverts
+par cette même licence CC BY-SA 4.0.

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Coach Risques — Mockup v6 : trois ambiances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:wght@500;600&display=swap"/>
+<style>
+  body { margin: 0; padding: 32px 24px; background: #F5F5F0; font-family: Inter, sans-serif; color: #1B1D22; }
+  .wrap { max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; }
+  .doc-header h1 { font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 500; margin: 0 0 6px 0; }
+  .doc-header p { color: #4A4F58; font-size: 15px; max-width: 70ch; margin: 0; }
+  .section-label { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A7466; margin-bottom: 8px; font-weight: 500; }
+  .section-title { font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 500; margin: 0 0 6px 0; }
+  .section-desc { color: #4A4F58; font-size: 14px; margin: 0 0 16px 0; max-width: 72ch; }
+
+  .board { border-radius: 16px; padding: 32px; box-shadow: 0 8px 24px rgba(15,20,30,0.15); position: relative; overflow: hidden; }
+
+  /* === Fond A : feutrine bleu sarcelle === */
+  .board-A {
+    background: #2C4759;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02) 0%, transparent 50%);
+  }
+  .board-A .tri-title, .board-A .hub-brand { color: #F5E8D0; }
+  .board-A .tri-sub, .board-A .hub-cabinet, .board-A .hub-teams { color: #B8C4CB; }
+  .board-A .hub-teams strong { color: #F5E8D0; }
+  .board-A .tri-header, .board-A .hub-header { border-bottom-color: rgba(245,232,208,0.15); }
+
+  /* === Fond B : sauge doux === */
+  .board-B {
+    background: #B8C7B0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(60,80,60,0.05) 0%, transparent 50%);
+  }
+  .board-B .tri-title, .board-B .hub-brand { color: #2A3A2A; }
+  .board-B .tri-sub, .board-B .hub-cabinet, .board-B .hub-teams { color: #5A6A5A; }
+  .board-B .hub-teams strong { color: #2A3A2A; }
+  .board-B .tri-header, .board-B .hub-header { border-bottom-color: rgba(42,58,42,0.15); }
+
+  /* === Fond C : anthracite casino === */
+  .board-C {
+    background: #1F252E;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,220,150,0.04) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(255,220,150,0.02) 0%, transparent 60%);
+  }
+  .board-C .tri-title, .board-C .hub-brand { color: #E8D5A0; }
+  .board-C .tri-sub, .board-C .hub-cabinet, .board-C .hub-teams { color: #A8A5A0; }
+  .board-C .hub-teams strong { color: #E8D5A0; }
+  .board-C .tri-header, .board-C .hub-header { border-bottom-color: rgba(232,213,160,0.18); }
+
+  /* Header */
+  .tri-header { display: flex; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 0.5px solid rgba(255,255,255,0.15); margin-bottom: 26px; }
+  .tri-title { font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+  .tri-sub { font-size: 14px; margin: 4px 0 0 0; }
+
+  .tri-main { display: grid; grid-template-columns: 360px 1fr; gap: 40px; align-items: stretch; }
+
+  /* ============ Carte-énoncé (v6, avec disposition texte corrigée) ============ */
+  .tri-left { display: flex; align-items: center; }
+  .tri-card {
+    background: #FFFCF6; border: 1.5px solid rgba(255,255,255,0.4); border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    padding: 28px 26px 20px 26px;
+    display: flex; flex-direction: column; gap: 18px;
+    width: 100%;
+    min-height: 360px;
+    position: relative;
+  }
+  .tri-card::before {
+    content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border: 0.5px solid #D9CFB8; border-radius: 8px; pointer-events: none;
+  }
+  .tri-card::after {
+    /* Coin cassé, façon carte à jouer */
+    content: '❦'; position: absolute; top: 14px; right: 14px; color: #B8A876; font-size: 14px; font-family: 'Cormorant Garamond', serif;
+  }
+  .tri-card-band {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px; border-bottom: 0.5px solid #E8E0D1;
+  }
+  .tri-card-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: #7A6A50; font-weight: 500; font-family: 'Cormorant Garamond', serif; }
+  .tri-card-team { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #B85A1E; font-style: italic; }
+  .team-dot { width: 8px; height: 8px; border-radius: 50%; background: #B85A1E; opacity: 0.7; }
+
+  /* Corps texte : alignement haut-gauche, PAS de centrage vertical qui casse le layout */
+  .tri-card-body {
+    font-family: 'Source Serif 4', serif; font-size: 19px; line-height: 1.6;
+    color: #1B1D22;
+    padding: 4px 0 0 0;
+    text-align: left;
+  }
+  .tri-card-body em { font-style: italic; color: #B02A2A; font-weight: 500; }
+
+  /* ============ Cibles avec logos sceau ============ */
+  .tri-targets { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tri-target {
+    background: #FFFCF6; border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 12px; padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    cursor: pointer;
+    min-height: 168px;
+    transition: transform 200ms ease;
+    position: relative;
+  }
+  .tri-target::before {
+    content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 0.5px solid #D9CFB8; border-radius: 8px; pointer-events: none;
+  }
+  .tri-target:hover { transform: translateY(-4px); }
+  /* Sceau coloré en haut à droite, façon cachet de cire */
+  .tri-target::after {
+    content: ''; position: absolute; top: 14px; right: 14px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--seal-color); opacity: 0.5;
+    box-shadow: 0 0 0 2px rgba(255,252,246,1), 0 0 0 3px var(--seal-color);
+  }
+  .tri-t-enjeu { --seal-color: #3E5E8F; }
+  .tri-t-objectif { --seal-color: #5A7DA8; }
+  .tri-t-risque { --seal-color: #B02A2A; }
+  .tri-t-issue { --seal-color: #B85A1E; }
+
+  .tri-target-emblem { width: 48px; height: 48px; }
+  .tri-target-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600;
+    margin: 0; color: #1B1D22; letter-spacing: 0.01em;
+  }
+  .tri-target-hint {
+    font-size: 13px; color: #4A4F58; margin: 0; line-height: 1.4;
+    font-style: italic;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .diff {
+    background: #FFFCF6; border: 0.5px solid #D9CFB8; border-radius: 10px;
+    padding: 22px; margin-top: 8px; font-size: 13px; color: #4A4F58; line-height: 1.65;
+  }
+  .diff strong { color: #1B1D22; }
+  .diff h3 { font-family: 'Source Serif 4', serif; font-size: 15px; margin: 0 0 10px 0; color: #1B1D22; font-weight: 500; }
+
+  .warn {
+    background: #FFF3D6; border: 0.5px solid #E0C97A; border-left: 4px solid #B85A1E;
+    padding: 18px 22px; border-radius: 8px; font-size: 13px; color: #4A4F58; line-height: 1.6;
+  }
+  .warn strong { color: #1B1D22; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="doc-header">
+    <h1>Le Tri · v6 · trois ambiances de fond radicalement différentes</h1>
+    <p>Correctifs : bug d'alignement du corps de carte corrigé (texte plaqué en haut-gauche, plus de « risque » qui flotte). Logos revus vers matérialité de sceau : sceau de cire coloré en haut à droite, ornement typographique en coin de carte, typo des noms de cible en Cormorant Garamond (plus jeu de société classique). Trois fonds à comparer : feutrine sarcelle sombre, sauge naturel, anthracite casino.</p>
+  </div>
+
+  <div class="warn">
+    <strong>Note de méthode importante :</strong> le graphiste que j'ai mobilisé jusqu'ici était trop éditorial (référence New Yorker / Brilliant), pas assez « jeu de société physique ». Si aucune de ces trois ambiances ne te parle, il faudra remobiliser un vrai <strong>concepteur de jeux de plateau + graphiste spécialisé jeux de société</strong> (matérialité de carte, relief, illustrations façon Wingspan / Terra Mystica), pas des profils UX/graphisme génériques. Dis-le moi et je lance le panel spécialisé.
+  </div>
+
+  <!-- ============ FOND A · FEUTRINE SARCELLE ============ -->
+  <div>
+    <span class="section-label">Ambiance A · feutrine sarcelle sombre</span>
+    <h2 class="section-title">Fond #2C4759 — l'ambiance table de jeu tamisée</h2>
+    <p class="section-desc">Bleu sarcelle profond, façon feutrine de table de bridge / poker. Les cartes crème sortent en 3D. Wordmarks en crème clair.</p>
+    <div class="board board-A">
+      <div class="tri-header">
+        <svg width="48" height="54" viewBox="0 0 100 115">
+          <polygon points="50,3 95,29 95,86 50,112 5,86 5,29" fill="rgba(245,232,208,0.08)" stroke="#F5E8D0" stroke-width="2"/>
+          <polygon points="50,10 88,32 88,83 50,105 12,83 12,32" fill="none" stroke="#F5E8D0" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div><h3 class="tri-title">Le Tri</h3><p class="tri-sub">Reconnaître un risque parmi quatre catégories proches</p></div>
+      </div>
+
+      <div class="tri-main">
+        <div class="tri-left">
+          <div class="tri-card">
+            <div class="tri-card-band">
+              <span class="tri-card-tag">Formulation</span>
+              <span class="tri-card-team"><span class="team-dot"></span>Colibri</span>
+            </div>
+            <div class="tri-card-body">« Notre principal <em>risque</em>, c'est de ne pas livrer la V2 le 30 septembre. »</div>
+          </div>
+        </div>
+
+        <div class="tri-targets">
+          <div class="tri-target tri-t-enjeu">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#3E5E8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 40h12M20 40v-14h8v14M18 26h12M24 26c-3 -3 -3 -8 0 -12M24 14l-2 -4l2 -4l2 4l-2 4z" fill="#3E5E8F" fill-opacity="0.15"/>
+              <ellipse cx="24" cy="10" rx="3" ry="4" fill="#3E5E8F" fill-opacity="0.3"/>
+            </svg>
+            <p class="tri-target-name">Enjeu</p>
+            <p class="tri-target-hint">Une valeur à préserver.</p>
+          </div>
+          <div class="tri-target tri-t-objectif">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#5A7DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="12"/><circle cx="24" cy="24" r="6" fill="#5A7DA8" fill-opacity="0.3"/><circle cx="24" cy="24" r="2" fill="#5A7DA8"/>
+              <path d="M40 8l-12 12M36 4v6h6"/>
+            </svg>
+            <p class="tri-target-name">Objectif</p>
+            <p class="tri-target-hint">Une cible mesurable à viser.</p>
+          </div>
+          <div class="tri-target tri-t-risque">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B02A2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" stroke-dasharray="3 2" fill="#B02A2A" fill-opacity="0.08"/>
+              <path d="M22 30v10" stroke-dasharray="2 2"/>
+              <circle cx="22" cy="42" r="1.5" fill="#B02A2A" fill-opacity="0.4"/>
+            </svg>
+            <p class="tri-target-name">Risque</p>
+            <p class="tri-target-hint">Un événement incertain, à venir.</p>
+          </div>
+          <div class="tri-target tri-t-issue">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B85A1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" fill="#B85A1E" fill-opacity="0.25"/>
+              <path d="M14 34l3 -2M20 36l1 -1M28 36l-1 -1M34 34l-3 -2" stroke-width="2"/>
+              <circle cx="17" cy="34" r="1" fill="#B85A1E"/><circle cx="24" cy="38" r="1" fill="#B85A1E"/><circle cx="31" cy="34" r="1" fill="#B85A1E"/>
+            </svg>
+            <p class="tri-target-name">Issue</p>
+            <p class="tri-target-hint">Un problème déjà constaté.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOND B · SAUGE ============ -->
+  <div>
+    <span class="section-label">Ambiance B · sauge naturel</span>
+    <h2 class="section-title">Fond #B8C7B0 — l'ambiance verdoyante douce</h2>
+    <p class="section-desc">Vert sauge poudré, référence jeu de plateau tempéré (Wingspan, Everdell). Chaleureux, moins dramatique que le sombre, plus vivant que le crème.</p>
+    <div class="board board-B">
+      <div class="tri-header">
+        <svg width="48" height="54" viewBox="0 0 100 115">
+          <polygon points="50,3 95,29 95,86 50,112 5,86 5,29" fill="rgba(42,58,42,0.08)" stroke="#2A3A2A" stroke-width="2"/>
+          <polygon points="50,10 88,32 88,83 50,105 12,83 12,32" fill="none" stroke="#2A3A2A" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div><h3 class="tri-title">Le Tri</h3><p class="tri-sub">Reconnaître un risque parmi quatre catégories proches</p></div>
+      </div>
+
+      <div class="tri-main">
+        <div class="tri-left">
+          <div class="tri-card">
+            <div class="tri-card-band">
+              <span class="tri-card-tag">Formulation</span>
+              <span class="tri-card-team"><span class="team-dot"></span>Colibri</span>
+            </div>
+            <div class="tri-card-body">« Notre principal <em>risque</em>, c'est de ne pas livrer la V2 le 30 septembre. »</div>
+          </div>
+        </div>
+
+        <div class="tri-targets">
+          <div class="tri-target tri-t-enjeu">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#3E5E8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 40h12M20 40v-14h8v14M18 26h12M24 26c-3 -3 -3 -8 0 -12"/>
+              <ellipse cx="24" cy="10" rx="3" ry="4" fill="#3E5E8F" fill-opacity="0.3"/>
+            </svg>
+            <p class="tri-target-name">Enjeu</p>
+            <p class="tri-target-hint">Une valeur à préserver.</p>
+          </div>
+          <div class="tri-target tri-t-objectif">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#5A7DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="12"/><circle cx="24" cy="24" r="6" fill="#5A7DA8" fill-opacity="0.3"/><circle cx="24" cy="24" r="2" fill="#5A7DA8"/>
+              <path d="M40 8l-12 12M36 4v6h6"/>
+            </svg>
+            <p class="tri-target-name">Objectif</p>
+            <p class="tri-target-hint">Une cible mesurable à viser.</p>
+          </div>
+          <div class="tri-target tri-t-risque">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B02A2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" stroke-dasharray="3 2" fill="#B02A2A" fill-opacity="0.08"/>
+              <path d="M22 30v10" stroke-dasharray="2 2"/>
+            </svg>
+            <p class="tri-target-name">Risque</p>
+            <p class="tri-target-hint">Un événement incertain, à venir.</p>
+          </div>
+          <div class="tri-target tri-t-issue">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B85A1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" fill="#B85A1E" fill-opacity="0.25"/>
+              <path d="M14 34l3 -2M20 36l1 -1M28 36l-1 -1M34 34l-3 -2" stroke-width="2"/>
+            </svg>
+            <p class="tri-target-name">Issue</p>
+            <p class="tri-target-hint">Un problème déjà constaté.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOND C · ANTHRACITE ============ -->
+  <div>
+    <span class="section-label">Ambiance C · anthracite casino</span>
+    <h2 class="section-title">Fond #1F252E — l'ambiance premium sombre</h2>
+    <p class="section-desc">Anthracite noir bleuté, référence table de casino / poker premium. Contraste maximal avec les cartes crème, effet dramatique.</p>
+    <div class="board board-C">
+      <div class="tri-header">
+        <svg width="48" height="54" viewBox="0 0 100 115">
+          <polygon points="50,3 95,29 95,86 50,112 5,86 5,29" fill="rgba(232,213,160,0.06)" stroke="#E8D5A0" stroke-width="2"/>
+          <polygon points="50,10 88,32 88,83 50,105 12,83 12,32" fill="none" stroke="#E8D5A0" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div><h3 class="tri-title">Le Tri</h3><p class="tri-sub">Reconnaître un risque parmi quatre catégories proches</p></div>
+      </div>
+
+      <div class="tri-main">
+        <div class="tri-left">
+          <div class="tri-card">
+            <div class="tri-card-band">
+              <span class="tri-card-tag">Formulation</span>
+              <span class="tri-card-team"><span class="team-dot"></span>Colibri</span>
+            </div>
+            <div class="tri-card-body">« Notre principal <em>risque</em>, c'est de ne pas livrer la V2 le 30 septembre. »</div>
+          </div>
+        </div>
+
+        <div class="tri-targets">
+          <div class="tri-target tri-t-enjeu">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#3E5E8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 40h12M20 40v-14h8v14M18 26h12M24 26c-3 -3 -3 -8 0 -12"/>
+              <ellipse cx="24" cy="10" rx="3" ry="4" fill="#3E5E8F" fill-opacity="0.3"/>
+            </svg>
+            <p class="tri-target-name">Enjeu</p>
+            <p class="tri-target-hint">Une valeur à préserver.</p>
+          </div>
+          <div class="tri-target tri-t-objectif">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#5A7DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="12"/><circle cx="24" cy="24" r="6" fill="#5A7DA8" fill-opacity="0.3"/><circle cx="24" cy="24" r="2" fill="#5A7DA8"/>
+              <path d="M40 8l-12 12M36 4v6h6"/>
+            </svg>
+            <p class="tri-target-name">Objectif</p>
+            <p class="tri-target-hint">Une cible mesurable à viser.</p>
+          </div>
+          <div class="tri-target tri-t-risque">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B02A2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" stroke-dasharray="3 2" fill="#B02A2A" fill-opacity="0.08"/>
+              <path d="M22 30v10" stroke-dasharray="2 2"/>
+            </svg>
+            <p class="tri-target-name">Risque</p>
+            <p class="tri-target-hint">Un événement incertain, à venir.</p>
+          </div>
+          <div class="tri-target tri-t-issue">
+            <svg class="tri-target-emblem" viewBox="0 0 48 48" fill="none" stroke="#B85A1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20a7 7 0 0 1 0 -14a9 9 0 0 1 16 -1a7 7 0 0 1 4 15h-20z" fill="#B85A1E" fill-opacity="0.25"/>
+              <path d="M14 34l3 -2M20 36l1 -1M28 36l-1 -1M34 34l-3 -2" stroke-width="2"/>
+            </svg>
+            <p class="tri-target-name">Issue</p>
+            <p class="tri-target-hint">Un problème déjà constaté.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="diff">
+    <h3>Ce qui change dans la v6</h3>
+    <strong>Fond</strong> · trois ambiances radicalement différentes du crème. Feutrine sarcelle A pour l'effet dramatique table de bridge, sauge B pour naturel-tempéré, anthracite C pour premium casino.<br>
+    <strong>Logos</strong> · agrandis à 48px (contre 32-40), enrichis avec du remplissage sur certains éléments (fills semi-transparents), effet cartouche.<br>
+    <strong>Ornement de carte</strong> · un caractère typographique ❦ en coin haut-droit, à la façon des jeux de tarot classique.<br>
+    <strong>Sceau de cire</strong> · petit disque coloré en haut-droit de chaque cible, à la manière d'un cachet royal — remplace le kbd.<br>
+    <strong>Typo des noms</strong> · Cormorant Garamond (au lieu de Source Serif 4) pour les noms de cible — plus jeu de société classique.<br>
+    <strong>Alignement corrigé</strong> · le corps texte de la carte-énoncé n'utilise plus align-items: center qui cassait la disposition.
+  </div>
+
+</div>
+</body>
+</html>

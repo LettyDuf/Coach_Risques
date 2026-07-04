@@ -1,0 +1,131 @@
+.anatpick {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: var(--risk-space-8) var(--risk-space-6) var(--risk-space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--risk-space-8);
+}
+
+.anatpick__header {
+  display: flex;
+  align-items: center;
+}
+
+.anatpick__back {
+  background: transparent;
+  border: none;
+  padding: var(--risk-space-1) 0;
+  color: var(--risk-focus);
+  font-size: var(--risk-text-sm);
+  cursor: pointer;
+  font-family: var(--risk-font-sans);
+}
+
+.anatpick__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--risk-space-3);
+}
+
+.anatpick__eyebrow {
+  font-size: var(--risk-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--risk-text-muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+.anatpick__title {
+  font-size: var(--risk-text-xl);
+  color: var(--risk-text);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.anatpick__lede {
+  font-size: var(--risk-text-md);
+  color: var(--risk-text-muted);
+  font-family: var(--risk-font-serif);
+  margin: 0;
+  max-width: var(--risk-measure);
+}
+
+.anatpick__lede strong {
+  color: var(--risk-text);
+  font-weight: 600;
+}
+
+.anatpick__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--risk-space-4);
+}
+
+@media (min-width: 720px) {
+  .anatpick__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.anatpick__card {
+  background: var(--risk-surface);
+  border: 1px solid var(--risk-border);
+  border-radius: var(--risk-radius-lg);
+  padding: var(--risk-space-6);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--risk-space-3);
+  text-align: left;
+  font-family: var(--risk-font-sans);
+  transition: transform 150ms ease, box-shadow 150ms ease,
+    border-color 200ms ease;
+  position: relative;
+}
+
+.anatpick__card:hover,
+.anatpick__card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--risk-shadow-md);
+  border-color: var(--risk-focus);
+}
+
+.anatpick__card--recommended {
+  border: 2px solid var(--risk-focus);
+}
+
+.anatpick__card-tag {
+  align-self: flex-start;
+  background: var(--risk-focus);
+  color: white;
+  font-size: var(--risk-text-xs);
+  font-weight: 600;
+  padding: var(--risk-space-1) var(--risk-space-3);
+  border-radius: var(--risk-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.anatpick__card-title {
+  font-family: var(--risk-font-serif);
+  font-size: var(--risk-text-lg);
+  color: var(--risk-text);
+  margin: 0;
+}
+
+.anatpick__card-lede {
+  font-family: var(--risk-font-serif);
+  font-size: var(--risk-text-sm);
+  color: var(--risk-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.anatpick__card-meta {
+  font-size: var(--risk-text-xs);
+  color: var(--risk-text-muted);
+  margin: 0;
+  font-style: italic;
+}
