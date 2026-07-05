@@ -266,6 +266,33 @@ body:has(.triboard) {
   display: flex;
   flex-direction: column;
   transform: rotate(-1.5deg);
+  transform-origin: center;
+  animation: card-from-pile 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* La carte sort visuellement du paquet de pile (à gauche) et se pose
+   au centre. Un seul mouvement continu, sans rebond. Départ : position
+   pile + rotation subtile + scale légèrement réduit (perspective).
+   Fin : position finale + tilt de repos + scale 1. */
+@keyframes card-from-pile {
+  0% {
+    opacity: 0;
+    transform: translate(-380px, -20px) rotate(-6deg) scale(0.88);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-1.5deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+    transform: rotate(-1.5deg);
+  }
 }
 
 .card__rosace {

@@ -374,86 +374,359 @@ function labelOf(v: TriageVerdict): string {
 function TargetIllustration({ verdict }: { verdict: TriageVerdict }) {
   switch (verdict) {
     case "enjeu":
-      // Coffret de valeur (bijou)
+      // Coffre à trésor : corps rectangulaire, couvercle bombé, rehausses or
+      // horizontales et verticales, cadenas doré central bien visible.
+      // Métaphore : ce qui a de la valeur et qu'on garde sous clé.
       return (
         <svg
           viewBox="0 0 100 100"
           fill="none"
-          stroke="var(--cabinet-or-sceau)"
-          strokeWidth="1.7"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M20 55l35 -15l40 15l-35 15z" fill="var(--cabinet-target-enjeu)" />
-          <path d="M20 55v22l35 15v-22" fill="var(--cabinet-target-enjeu-ink)" />
-          <path d="M55 70v22l40 -15v-22" fill="#284A6E" />
-          <path d="M20 55l35 -15l40 15" strokeWidth="2" />
-          <path d="M52 43l6 -4l6 3" strokeWidth="1.8" opacity="0.9" />
-          <circle cx="70" cy="68" r="2.4" fill="var(--cabinet-or-sceau)" />
+          {/* Ombre au sol */}
+          <ellipse cx="50" cy="90" rx="34" ry="3" fill="#000" opacity="0.35" />
+
+          {/* Corps rectangulaire (base du coffre) */}
+          <rect
+            x="14"
+            y="52"
+            width="72"
+            height="34"
+            fill="var(--cabinet-target-enjeu-ink)"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2.2"
+          />
+
+          {/* Couvercle bombé */}
+          <path
+            d="M14 52 Q50 24 86 52 L86 46 Q50 22 14 46 Z"
+            fill="var(--cabinet-target-enjeu)"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2.2"
+          />
+
+          {/* Bande médiane sur le couvercle (arête haute) */}
+          <path
+            d="M14 46 Q50 22 86 46"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="1.2"
+            opacity="0.75"
+            fill="none"
+          />
+
+          {/* Rehausses or VERTICALES (bandes de renfort classiques d'un coffre) */}
+          <path
+            d="M28 46 Q28 32 30 24 M72 46 Q72 32 70 24"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2"
+            opacity="0.85"
+            fill="none"
+          />
+          <line
+            x1="28"
+            y1="52"
+            x2="28"
+            y2="86"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2"
+          />
+          <line
+            x1="72"
+            y1="52"
+            x2="72"
+            y2="86"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2"
+          />
+
+          {/* Bande or HORIZONTALE médiane sur le corps */}
+          <line
+            x1="14"
+            y1="66"
+            x2="86"
+            y2="66"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="1.5"
+            opacity="0.75"
+          />
+
+          {/* CADENAS DORÉ (pièce maîtresse, signal fort de coffre) */}
+          {/* Anse en fer à cheval */}
+          <path
+            d="M44 60 L44 55 Q44 48 50 48 Q56 48 56 55 L56 60"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="2.2"
+            fill="none"
+          />
+          {/* Corps du cadenas */}
+          <rect
+            x="41"
+            y="60"
+            width="18"
+            height="16"
+            rx="2"
+            fill="var(--cabinet-or-sceau)"
+            stroke="#2A2622"
+            strokeWidth="1"
+          />
+          {/* Trou de serrure */}
+          <circle cx="50" cy="66" r="1.8" fill="#2A2622" />
+          <path d="M50 67.5 L50 72" stroke="#2A2622" strokeWidth="1.6" />
+
+          {/* Reflet sur le corps */}
+          <path
+            d="M18 56 L18 82"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="0.6"
+            opacity="0.35"
+            fill="none"
+          />
         </svg>
       );
+
     case "objectif":
-      // Arc bandé + flèche vers cible
+      // Cible d'archerie avec flèche plantée en plein cœur.
+      // Métaphore : le but visé, atteint avec précision.
       return (
         <svg
           viewBox="0 0 100 100"
           fill="none"
-          stroke="var(--cabinet-parchment)"
-          strokeWidth="1.7"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M25 20c15 20 15 40 0 60" />
-          <path d="M25 25l0 50" opacity="0.9" />
-          <path d="M40 50l35 0" strokeWidth="2" />
-          <path d="M70 46l6 4l-6 4" />
-          <path d="M42 47l-4 3l4 3" opacity="0.8" />
-        </svg>
-      );
-    case "risque":
-      // Carte de tarot à moitié retournée + éclair
-      return (
-        <svg
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="#C4B8C4"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M30 25l40 0l0 60l-40 0z" fill="var(--cabinet-target-risque)" />
-          <path d="M30 25l25 -12l40 5l-15 32z" fill="#7A5479" />
-          <circle cx="55" cy="24" r="7" opacity="0.7" />
-          <path d="M55 17v14M48 24h14" opacity="0.7" />
-          <path
-            d="M65 45c-2 -3 -5 -3 -7 -1c-3 -1 -5 1 -5 3c-3 0 -3 4 0 4l14 0c2 0 2 -4 -2 -6z"
-            opacity="0.95"
-          />
-        </svg>
-      );
-    case "issue":
-      // Rocher tombé + chemin passé
-      return (
-        <svg
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="var(--cabinet-parchment)"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path
-            d="M8 85c12 -4 20 -6 30 -18c8 -5 15 -3 25 -14c6 -6 15 -8 30 -6"
-            opacity="0.6"
-            strokeDasharray="4 2"
-          />
-          <path
-            d="M40 55l-8 5l-4 12l6 8l14 3l10 -6l3 -10l-8 -10z"
+          {/* Cible : 4 anneaux concentriques */}
+          <circle
+            cx="40"
+            cy="54"
+            r="32"
             fill="var(--cabinet-parchment)"
-            fillOpacity="0.7"
+            stroke="var(--cabinet-or-sceau)"
+            strokeWidth="1.5"
           />
-          <path d="M40 55l16 2l-6 8z" opacity="0.5" />
-          <path d="M50 65l7 -3l-3 8z" opacity="0.5" />
+          <circle cx="40" cy="54" r="24" fill="var(--cabinet-target-objectif)" />
+          <circle cx="40" cy="54" r="16" fill="var(--cabinet-parchment)" />
+          <circle cx="40" cy="54" r="9" fill="var(--cabinet-target-objectif)" />
+          <circle cx="40" cy="54" r="3" fill="var(--cabinet-parchment)" />
+          {/* Ombre portée de la flèche sur la cible */}
+          <line
+            x1="42"
+            y1="56"
+            x2="78"
+            y2="20"
+            stroke="#000"
+            strokeWidth="2"
+            opacity="0.15"
+          />
+          {/* Hampe de la flèche */}
+          <line
+            x1="40"
+            y1="54"
+            x2="80"
+            y2="14"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="2.4"
+          />
+          {/* Pointe métallique (dans la cible) */}
+          <path
+            d="M40 54 L45 51 L44 58 Z"
+            fill="var(--cabinet-parchment)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="0.5"
+          />
+          {/* Empennage à plumes (3 plumes) */}
+          <path
+            d="M78 16 L88 6 L86 18 Z"
+            fill="var(--cabinet-parchment)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="0.8"
+          />
+          <path
+            d="M82 20 L92 10 L90 22 Z"
+            fill="var(--cabinet-or-sceau)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="0.6"
+            opacity="0.9"
+          />
+          {/* Éclat lumineux (impact) */}
+          <path
+            d="M40 54 L44 50 M40 54 L36 50 M40 54 L44 58"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="0.8"
+            opacity="0.7"
+          />
+        </svg>
+      );
+
+    case "risque":
+      // Nuage d'orage stylisé avec éclair jaune.
+      // Métaphore : la menace incertaine qui approche.
+      return (
+        <svg
+          viewBox="0 0 100 100"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* Nuage principal : silhouette bosselée */}
+          <path
+            d="M22 46
+               C 18 38 26 30 34 32
+               C 36 22 52 20 58 30
+               C 68 26 82 32 80 44
+               C 86 48 84 58 74 58
+               L 30 58
+               C 20 60 14 52 22 46 Z"
+            fill="#C4B8C4"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1.8"
+          />
+          {/* Ombre du dessous du nuage */}
+          <path
+            d="M28 54 Q50 62 72 54"
+            stroke="#7A5479"
+            strokeWidth="1.4"
+            opacity="0.75"
+            fill="none"
+          />
+          {/* Éclair jaune (Z inversé) */}
+          <path
+            d="M52 58 L44 74 L54 74 L46 92 L64 68 L54 68 L60 58 Z"
+            fill="var(--cabinet-or-sceau)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1.2"
+          />
+          {/* Gouttes de pluie suggérées */}
+          <path
+            d="M30 64 L28 70 M38 66 L36 72 M72 66 L74 72 M80 64 L82 70"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+            opacity="0.8"
+          />
+          {/* Petites étoiles/étincelles autour de l'éclair */}
+          <circle cx="42" cy="80" r="0.8" fill="var(--cabinet-parchment)" opacity="0.6" />
+          <circle cx="66" cy="82" r="0.8" fill="var(--cabinet-parchment)" opacity="0.6" />
+        </svg>
+      );
+
+    case "issue":
+      // Chandelle éteinte fumante sur son chandelier doré.
+      // Métaphore : l'événement s'est produit, la lumière s'est éteinte,
+      // il ne reste que la fumée qui monte encore.
+      return (
+        <svg
+          viewBox="0 0 100 100"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* Ombre au sol */}
+          <ellipse cx="50" cy="92" rx="22" ry="2.5" fill="#000" opacity="0.4" />
+
+          {/* Base circulaire du chandelier (dorée) */}
+          <ellipse
+            cx="50"
+            cy="88"
+            rx="18"
+            ry="4"
+            fill="var(--cabinet-or-sceau)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1.2"
+          />
+          <ellipse
+            cx="50"
+            cy="87"
+            rx="12"
+            ry="2"
+            fill="var(--cabinet-or-sceau)"
+            stroke="#2A2622"
+            strokeWidth="0.6"
+            opacity="0.7"
+          />
+
+          {/* Colonne du chandelier */}
+          <path
+            d="M46 86 L46 74 L44 72 L44 68 L46 66 L54 66 L56 68 L56 72 L54 74 L54 86 Z"
+            fill="var(--cabinet-or-sceau)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1"
+          />
+
+          {/* Coupelle (rebord évasé pour recueillir la cire) */}
+          <path
+            d="M38 66 Q50 62 62 66 L58 68 Q50 65 42 68 Z"
+            fill="var(--cabinet-or-sceau)"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1"
+          />
+
+          {/* Bougie (raccourcie, elle a longuement brûlé) */}
+          <rect
+            x="45"
+            y="42"
+            width="10"
+            height="24"
+            fill="var(--cabinet-parchment)"
+            stroke="#7A6A4E"
+            strokeWidth="1"
+          />
+
+          {/* Coulée de cire figée sur le côté (elle a brûlé longtemps) */}
+          <path
+            d="M45 50 Q42 58 43 66 L45 66 Q45 58 45 50 Z"
+            fill="var(--cabinet-parchment)"
+            stroke="#7A6A4E"
+            strokeWidth="0.7"
+            fillOpacity="0.95"
+          />
+          <path
+            d="M55 54 Q57 62 56 66 L55 66 Q55 60 55 54 Z"
+            fill="var(--cabinet-parchment)"
+            stroke="#7A6A4E"
+            strokeWidth="0.6"
+            fillOpacity="0.9"
+          />
+
+          {/* Petit résidu de cire fondue à la surface */}
+          <path
+            d="M45 42 Q50 40 55 42 L55 44 Q50 42 45 44 Z"
+            fill="var(--cabinet-parchment)"
+            stroke="#7A6A4E"
+            strokeWidth="0.6"
+          />
+
+          {/* Mèche éteinte (noircie, courbée) */}
+          <path
+            d="M50 42 L50 36 Q51 33 49 30"
+            stroke="#2A2622"
+            strokeWidth="2"
+            fill="none"
+          />
+          <ellipse cx="49" cy="30" rx="1.6" ry="2" fill="#2A2622" />
+
+          {/* VOLUTES DE FUMÉE qui montent (signal fort : la bougie vient de s'éteindre) */}
+          <path
+            d="M49 28 Q46 22 50 17 Q54 12 48 6"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            opacity="0.75"
+          />
+          <path
+            d="M49 28 Q52 24 49 20"
+            stroke="var(--cabinet-parchment)"
+            strokeWidth="1.4"
+            fill="none"
+            strokeLinecap="round"
+            opacity="0.5"
+          />
+
+          {/* Petites particules de fumée qui s'échappent */}
+          <circle cx="48" cy="4" r="1.1" fill="var(--cabinet-parchment)" opacity="0.55" />
+          <circle cx="52" cy="10" r="0.9" fill="var(--cabinet-parchment)" opacity="0.5" />
+          <circle cx="47" cy="14" r="0.7" fill="var(--cabinet-parchment)" opacity="0.45" />
         </svg>
       );
   }
