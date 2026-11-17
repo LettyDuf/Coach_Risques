@@ -15,7 +15,7 @@ import {
   type ItemId,
   type TriageVerdict,
 } from "@domain/index";
-import type { TriageItem, TriageTheme } from "@content/triage/types";
+import type { TriageItem, TriageTheme } from "@domain/index";
 import { TRIPTYQUE_THEORY } from "@content/theory/triptyque";
 import ZoomControl, { useZoom } from "@adapters/ui/shared/ZoomControl";
 import "@adapters/ui/shared/ZoomControl.css";

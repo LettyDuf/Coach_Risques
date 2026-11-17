@@ -1,4 +1,6 @@
 /**
+ * Forme des items du domaine (D25) : le domaine la définit, le corpus la remplit.
+ *
  * Types du corpus « Le Détective » (mécanique chain).
  *
  * Chaque item présente un scénario et UN composant déjà rempli (la « preuve »).
@@ -11,10 +13,12 @@
  *  - auto-évaluation comparée par l'apprenant.
  *
  * Discipline (D15) : aucun message pédagogique n'est généré par le moteur.
- * Toute formulation visible est écrite par Lætitia dans ce fichier.
+ * Toute formulation visible est écrite par Lætitia dans le corpus
+ * (src/content/chain/items.ts).
  */
 
-import type { ContentItem, RiskFormulation, RiskComponent } from "@domain/index";
+import type { ContentItem } from "../ports/ContentRepository";
+import type { RiskFormulation, RiskComponent } from "../valueObjects/RiskFormulation";
 
 export type ChainTheme =
   | "logiciel"

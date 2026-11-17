@@ -1,4 +1,6 @@
 /**
+ * Forme des items du domaine (D25) : le domaine la définit, le corpus la remplit.
+ *
  * Types du corpus « Les Briques ».
  *
  * 3 sous-mécaniques discriminées par `component` :
@@ -14,7 +16,7 @@
  * écrits par Lætitia dans le corpus, le moteur ne formule jamais).
  */
 
-import type { ContentItem } from "@domain/index";
+import type { ContentItem } from "../ports/ContentRepository";
 
 /** Nature possible d'un candidat pour la brique Cause. */
 export type CauseNature = "cause" | "constat" | "evenement" | "antecedent";

@@ -64,7 +64,7 @@ module.exports = {
             ],
             patterns: [
               { group: ["react/*", "react-dom/*"], message: "Pas de React dans le domaine." },
-              { group: ["@adapters/*", "@app/*"], message: "Le domaine ignore les adaptateurs et l'app." },
+              { group: ["@adapters/*", "@app/*", "@content/*"], message: "Le domaine ignore le contenu, les adaptateurs et l'app." },
             ],
           },
         ],

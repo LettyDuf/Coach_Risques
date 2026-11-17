@@ -7,7 +7,7 @@
  * Découpage en 3 fichiers pour la lisibilité, agrégés ici.
  */
 
-import type { BrickItem } from "./types";
+import type { BrickItem } from "@domain/index";
 import { BRICKS_CAUSE_ITEMS } from "./items-cause";
 import { BRICKS_EVENT_ITEMS } from "./items-event";
 import { BRICKS_CONSEQUENCE_ITEMS } from "./items-consequence";

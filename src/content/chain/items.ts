@@ -11,7 +11,7 @@
  */
 
 import { ItemId, MECHANICS } from "@domain/index";
-import type { ChainItem } from "./types";
+import type { ChainItem } from "@domain/index";
 
 export const CHAIN_ITEMS: ReadonlyArray<ChainItem> = [
   {

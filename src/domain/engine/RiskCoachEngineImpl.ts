@@ -35,9 +35,9 @@ import { evaluateTriage } from "../services/TriageEvaluator";
 import { diagnoseChain } from "../services/ChainDiagnoser";
 import { evaluateBrick } from "../services/BrickEvaluator";
 import { computeMasteryLevel } from "../services/MasteryProgressor";
-import type { TriageItem } from "@content/triage/types";
-import type { ChainItem } from "@content/chain/types";
-import type { BrickItem } from "@content/bricks/types";
+import type { TriageItem } from "../items/TriageItem";
+import type { ChainItem } from "../items/ChainItem";
+import type { BrickItem } from "../items/BrickItem";
 
 const NOT_IMPLEMENTED: EvaluationResult = {
   feedbacks: [

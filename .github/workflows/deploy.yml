@@ -1,0 +1,76 @@
+name: Qualité et publication
+
+# Filet de sécurité (règle Gesto non négociable) :
+#   1. À chaque demande de modification (pull request) et à chaque envoi sur main,
+#      le job « qualite » lance : linter, tests (dont le test d'architecture
+#      hexagonale), vérification des types et construction.
+#   2. La publication ne part QUE depuis main, et SEULEMENT si « qualite » est vert :
+#      jamais de version cassée en ligne.
+#
+# Côté repo (À FAIRE au moment de fusionner) : Settings → Pages → Source :
+# passer de « Deploy from a branch » (dossier docs/) à « GitHub Actions ».
+# Tant que la source reste « docs/ », le site publié échappe aux tests.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  qualite:
+    name: Linter, tests, architecture, construction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v6
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Linter
+        run: npm run lint
+
+      - name: Tests (dont architecture hexagonale)
+        run: npm test
+
+      - name: Construction (vérifie aussi les types)
+        run: npm run build
+
+      - name: Préparer le site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist
+
+  publication:
+    name: Publication GitHub Pages
+    needs: qualite
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configurer Pages
+        uses: actions/configure-pages@v6
+
+      - name: Publier
+        id: deployment
+        uses: actions/deploy-pages@v5
