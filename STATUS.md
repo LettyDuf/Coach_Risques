@@ -2,6 +2,10 @@
 
 Rituel de continuité de session. À mettre à jour en clôture de chaque session.
 
+## 2026-11-17 : passage en « tous droits réservés »
+
+`LICENSE` (CC BY-SA 4.0) remplacé par `COPYRIGHT.md`, README, `package.json` et `package-lock.json` mis à jour (D25).
+
 ## Session — 2026-07-04 — Charte cabinet appliquée au Tri
 
 ### Fait

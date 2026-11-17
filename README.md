@@ -5,8 +5,6 @@ Pour les équipes Lean-Agile francophones (Scrum, SAFe, OKR) qui veulent
 distinguer proprement enjeu, objectif, risque et issue, puis reconstituer
 des chaînes de risque qui tiennent debout.
 
-[![Licence : CC BY-SA 4.0](https://img.shields.io/badge/Licence-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
-
 ## Essayer l'outil en ligne
 
 👉 **[Lancer Coach Risques](https://lettyduf.github.io/Coach_Risques/)**
@@ -94,12 +92,8 @@ avec CSS et JS inlinés). C'est ce fichier qui est servi par GitHub Pages.
 - `audits/` — notes des panels d'experts
 - `proposition-corpus-*.md` — corpus soumis à validation
 
-## Licence
+## Droits d'auteur et usage
 
-Ce projet est distribué sous licence [Creative Commons
-Attribution-ShareAlike 4.0 International (CC BY-SA
-4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.fr).
+© 2026 Lætitia Dufour. Tous droits réservés.
 
-Vous pouvez le partager, l'adapter, l'utiliser y compris commercialement,
-à deux conditions : (1) créditer l'auteure originale, (2) diffuser vos
-adaptations sous la même licence.
+Cet outil n'est **pas distribué sous licence open source**. Le code, le contenu pédagogique et la documentation sont protégés par le droit d'auteur canadien. Pour les conditions précises et toute demande d'usage, de citation ou de partenariat, voir [COPYRIGHT.md](COPYRIGHT.md).
