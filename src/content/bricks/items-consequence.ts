@@ -4,7 +4,7 @@
  */
 
 import { ItemId, MECHANICS } from "@domain/index";
-import type { BrickConsequenceItem } from "./types";
+import type { BrickConsequenceItem } from "@domain/index";
 
 export const BRICKS_CONSEQUENCE_ITEMS: ReadonlyArray<BrickConsequenceItem> = [
   {

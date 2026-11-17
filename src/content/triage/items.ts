@@ -13,7 +13,7 @@
  */
 
 import { ItemId, MECHANICS } from "@domain/index";
-import type { TriageItem } from "./types";
+import type { TriageItem } from "@domain/index";
 
 export const TRIAGE_ITEMS: ReadonlyArray<TriageItem> = [
   // ──────────────────────────────────────────────────────────────────

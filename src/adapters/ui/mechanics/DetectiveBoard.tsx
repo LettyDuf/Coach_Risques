@@ -17,7 +17,7 @@ import {
   type PartialRiskFormulation,
   type RiskComponent,
 } from "@domain/index";
-import type { ChainItem } from "@content/chain/types";
+import type { ChainItem } from "@domain/index";
 import { createJsonContentRepository } from "@adapters/content-loader/JsonContentRepository";
 import "./DetectiveBoard.css";
 

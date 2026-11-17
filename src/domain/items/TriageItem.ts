@@ -1,4 +1,6 @@
 /**
+ * Forme des items du domaine (D25) : le domaine la définit, le corpus la remplit.
+ *
  * Types du corpus « Le Tri ».
  *
  * Chaque item porte :
@@ -8,12 +10,13 @@
  *  - les messages de feedback pour chaque verdict erroné possible.
  *
  * Discipline (D15) : aucun message n'est généré par le moteur. Tous
- * les messages sont écrits en français par Lætitia dans ce fichier.
+ * les messages sont écrits en français par Lætitia dans le corpus
+ * (src/content/triage/items.ts).
  * Le moteur sélectionne, ne formule jamais.
  */
 
-import type { ContentItem } from "@domain/index";
-import type { TriageVerdict } from "@domain/index";
+import type { ContentItem } from "../ports/ContentRepository";
+import type { TriageVerdict } from "../valueObjects/TriageVerdict";
 
 export type TriageTheme =
   | "logiciel"

@@ -16,6 +16,15 @@ export default defineConfig({
         },
       },
       {
+        // Architecture hexagonale : qui a le droit de dépendre de qui. Node, pas de DOM.
+        extends: true,
+        test: {
+          name: "architecture",
+          environment: "node",
+          include: ["tests/architecture/**/*.test.ts"],
+        },
+      },
+      {
         // Intégrité du corpus pédagogique — Node aussi, pas besoin de DOM.
         extends: true,
         test: {

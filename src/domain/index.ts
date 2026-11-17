@@ -21,3 +21,8 @@ export type { ContentRepository, ContentItem } from "./ports/ContentRepository";
 export type { MasteryStore, SuccessfulPass } from "./ports/MasteryStore";
 export type { RandomSource } from "./ports/RandomSource";
 export type { Clock } from "./ports/Clock";
+
+// Forme des items consommés par le moteur (le contenu les remplit, le domaine les définit).
+export type * from "./items/TriageItem";
+export type * from "./items/ChainItem";
+export type * from "./items/BrickItem";

@@ -17,7 +17,7 @@ import {
   type EvaluationResult,
   type ItemId,
 } from "@domain/index";
-import type { BrickItem } from "@content/bricks/types";
+import type { BrickItem } from "@domain/index";
 import { createJsonContentRepository } from "@adapters/content-loader/JsonContentRepository";
 import "./BricksBoard.css";
 
